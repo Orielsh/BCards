@@ -1,0 +1,11 @@
+.Default {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .content{
+        flex: 1;
+        padding: 10px;
+        margin: 0 auto;
+    }   
+}

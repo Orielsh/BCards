@@ -1,0 +1,64 @@
+.CardPage {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 5px;
+    @media(max-width:768px){
+        flex-direction: column;
+    }
+    img{
+        width: 60%;
+        object-fit: cover;
+        @media(max-width:768px){
+            width: 100%;
+        }
+    }
+
+    .like{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: 2em;
+        user-select: none;
+        @media(max-width:768px){
+            background-color: #fff;
+            display: flex;
+            padding: 10px;
+            border-radius: 30px;
+        }
+        >*{
+            cursor: pointer;
+        }
+    }
+    
+    .description{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+        
+        padding: 0 5px 0 10px;
+        .contact{
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            font-style: italic;
+            .bottom{
+                display: flex;
+                margin: 5px 0;
+                background-color: var(--sec-bgc);
+                justify-content: space-evenly;
+                font-size: 2em;
+                padding-top: 3px;
+            }
+
+            button{
+                background-color: transparent;
+                border: none;
+                font-size: 1em;
+                cursor: pointer;
+            }
+        }
+    }
+}

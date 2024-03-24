@@ -1,0 +1,33 @@
+.LoggedIn {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 10px;
+    margin: auto;
+    
+    h3{
+        font-weight: normal;
+    }
+
+    a, a:visited{
+        border-radius: 5px;
+        background-color: #08470a;
+        padding: 0 0 3px 0;
+        color: white;
+    }
+    button{
+        border: none;
+        background-color: #9d1d1d;
+        color: white;
+        font-weight: 500;
+        font-size: 0.8em;
+        padding: 7px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        margin: auto;        
+        gap: 5px;
+    }
+}

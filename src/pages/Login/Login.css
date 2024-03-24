@@ -1,0 +1,122 @@
+
+.Login {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    @media(max-width: 576px){
+        font-size: 0.8em;
+    }
+    .Success{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font-size: 2em;
+        text-align: center;
+        .link{
+            font-size: 0.6em;
+        }
+    }
+
+    .form-wrapper {
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        h1 {
+            text-align: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+            
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                font-size: 1.2em;
+                gap: 5px;
+
+                label {
+                    font-weight: 500;
+                }
+
+                input {
+                    padding: 5px;
+                    font-size: 1.3em;
+                    border: 1px solid #ccc;
+                    background-color: #fff;
+                    border-radius: 5px;
+
+                }
+
+                .Link {
+                    text-align: end;
+                }
+            }
+
+            button {
+                border: none;
+                border-radius: 5px;
+                font-size: 1.5em;
+                background-color: #08470a;
+                padding: 7px;
+                margin-top: 30px;
+                cursor: pointer;
+                color: #fff;
+            }
+
+            .remember {
+                font-size: 1.2em;
+                display: flex;
+                align-items: center;
+                user-select: none;
+                margin-top: -10px;
+
+                >* {
+                    cursor: pointer;
+                }
+
+                label {
+                    padding-left: 10px;
+                    padding-bottom: 3px;
+                }
+
+                input[type="checkbox"] {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 5px;
+                    accent-color: #002201;
+                }
+
+
+            }
+
+
+        }
+
+        span {
+            text-align: center;
+
+            .register {
+                color: var(--primary-color);
+                font-weight: 500;
+            }
+        }
+
+        .err {
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #ebd0d0;
+            font-size: 1.1em;
+            display: flex;
+            align-items: start;
+            text-wrap: wrap;
+            text-overflow: ellipsis;
+            font-weight: 500;
+        }
+
+    }
+}

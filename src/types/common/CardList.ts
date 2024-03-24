@@ -1,0 +1,1 @@
+export type CardListType =  "favorited" | "userCards" | "all";
