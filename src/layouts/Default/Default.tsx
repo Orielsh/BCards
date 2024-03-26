@@ -24,6 +24,7 @@ export default function Default() {
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/about" element={<About/>}></Route>
             <Route path="/sign-up" element={<Register/>}></Route>
+            <Route path="/edit-user" element={<Register/>}></Route>
             <Route path='/card-details/:cardId' element={<CardPage/>}/>
             <Route path='/edit-card/:cardId' element={<CreateCard/>}/>
             <Route path='/create-card' element={<CreateCard/>}/>

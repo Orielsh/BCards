@@ -28,6 +28,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
             }     
         }
     }, [token]);
+    //problem with refresh cause loginDetails in context to be null
 
 
     return (

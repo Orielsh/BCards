@@ -3,9 +3,10 @@ import { AuthContext, AuthContextType } from "../../contexts/AuthContext/AuthCon
 import LoggedIn from "../../components/LoggedIn/LoggedIn";
 import { useForm } from "react-hook-form";
 import { IUserDetails } from "../../interfaces/user/IUser";
-import { register as signUp } from "../../services/AuthService";
+import { getUserById, register as signUp, updateUser } from "../../services/AuthService";
 import "./Register.css"
 import MessagePane from "../../components/MessagePane/MessagePane";
+import { ToastContext, ToastsContextType } from "../../contexts/ToastContext/ToastContext";
 
 interface IFormInput extends IUserDetails {
   passwordConfirm?: string,
@@ -13,14 +14,15 @@ interface IFormInput extends IUserDetails {
 
 export default function Register() {
 
-  const { token } = useContext<AuthContextType>(AuthContext);
+  const { token, loginDetails, setToken } = useContext<AuthContextType>(AuthContext);
   const [submit, setSubmit] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
   const [success, setSuccess] = useState<boolean>();
-  const { register, handleSubmit, getValues, formState: { errors }, watch } = useForm<IFormInput>();
+  const { register, handleSubmit, getValues, setValue, formState: { errors }, watch } = useForm<IFormInput>();
   const [img, setImg] = useState<string>("./assets/images/user-default.png");
-  const [hidePassword] = useState<boolean>(true);  //todo add eye icon on password fields
-  const [hidePassConfirm] = useState<boolean>(true);
+  const [hidePassword] = useState<boolean>(false);  //todo add eye icon on password fields
+  const [hidePassConfirm] = useState<boolean>(false);
+  const toasts = useContext<ToastsContextType | undefined>(ToastContext);
 
   useEffect(() => {
     if (submit)
@@ -29,9 +31,34 @@ export default function Register() {
           const userData: IFormInput = getValues();
           userData.image.alt = "User profile picture";
           delete userData.passwordConfirm;
-          const response: IUserDetails = await signUp(userData);
-          if (response)
+          const  updatedUser = {
+            phone: userData.phone,
+            name:{
+              first: userData.name.first,
+              middle: userData.name.middle,
+              last: userData.name.last,
+            },
+            image:{
+              url: userData.image.url,
+              alt: userData.image.alt,
+            },
+            address:{
+              state: userData.address.state,
+              country: userData.address.country,
+              city: userData.address.city,
+              street: userData.address.street,
+              houseNumber: userData.address.houseNumber,
+              zip: userData.address.zip,
+            },
+          };
+          
+
+          const response: IUserDetails = token ? await updateUser(token, updatedUser, loginDetails!._id) : await signUp(userData);
+          if (response){
             setSuccess(true);
+            setToken(null);
+            toasts?.addToast({headerText: "Success", message:"If user updated then you need to sign-in again", success: true});
+          }
         } catch (error) {
           setError(error as Error);
         }
@@ -41,11 +68,30 @@ export default function Register() {
       })();
   }, [submit]);
 
+  useEffect(()=>{
+    if(token && loginDetails){
+      (async()=>{
+        try{
+          const user = await getUserById(token, loginDetails._id);
+          setValue("name", (user).name);
+          setValue("phone", (user).phone);
+          setValue("email", (user).email);
+          setValue("password", (user).password);
+          setValue("image", (user).image);
+          setValue("address", (user).address);          
+        }catch(error){
+          const errorDetails: Error = error as Error;
+          toasts?.addToast({headerText: errorDetails.name, message: errorDetails.message, success: false});
+        }
+      })();
+    }
+  },[])
+
   return (
     <div className="Register">
       {error ? <MessagePane message={error.message} title="Error" className="" setError={setError} /> :
-        token ? <LoggedIn /> :
-          success ? <MessagePane setError={setError} message="Register Success" className="" /> :
+        (token && location.pathname === "/sign-up")? <LoggedIn /> :
+          success ? <MessagePane setError={setError} message="Success" className="" /> :
             <div>
               <div className="left">
                 <h2>Register</h2>

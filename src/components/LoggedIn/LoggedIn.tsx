@@ -13,6 +13,8 @@ export default function LoggedIn() {
       <h3>Already logged in</h3>
       <Link to="/">Back to Home</Link>
       <h3>OR</h3>
+      <Link to={"/edit-user"}>Edit your profile</Link>
+      <h3>OR</h3>
       <button onClick={()=>{setToken(null)}}>
         <span>Log out</span>
         <GoSignOut />

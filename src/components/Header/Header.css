@@ -112,7 +112,9 @@ header {
                 align-items: center;
                 gap: 15px;
                 font-weight: 500;
-                
+                a{
+                    cursor: pointer;
+                }
                 img{
                     height: 45px;
                     width: 45px;

@@ -19,7 +19,6 @@ import { PiPlus } from "react-icons/pi";
 const searchableLocations = ["/", "/home", "/favorites", "/my-cards"];
 
 export default function Header() {
-
   const { theme, setTheme } = useContext<ThemeContextType>(ThemeContext);   //delegate to separate file "themeToggler.."
   const {setFilterText, setListType} = useContext<CardListContextType>(CardListContext);
   const {token, loginDetails, setToken} = useContext<AuthContextType>(AuthContext);
@@ -82,7 +81,7 @@ export default function Header() {
           {user && <div className="user">
             <div className="details">
               <img src={userImg} alt={user.image.alt} onError={()=>{setUserImg("../assets/images/user-default.png")}}/>
-              <span>{user.name.first}</span>
+              <Link to={"/sign-up"}>{user.name.first}</Link>
             </div>
             <div className="actions">
               {user.isBusiness && <Link to="create-card" title="Create card"><PiPlus className="icon"/></Link>}
@@ -130,7 +129,7 @@ export default function Header() {
         {user && <div className="user xl-none">
           <div className="details">
             <img src={userImg} alt={user.image.alt} onError={()=>{setUserImg("../assets/images/user-default.png")}}/>
-            <span>{user.name.first}</span>
+            <Link to={"/sign-up"}>{user.name.first}</Link>
           </div>
           <div className="actions">
             {user.isBusiness && <Link to="create-card" title="Create card"><PiPlus className="icon"/></Link>}

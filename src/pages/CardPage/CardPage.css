@@ -37,7 +37,14 @@
         flex-direction: column;
         gap: 5px;
         flex: 1;
-        
+        p{
+            width: 500px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @media(max-width:1200px){
+                width: 230px;
+            }
+        }
         padding: 0 5px 0 10px;
         .contact{
             margin-top: auto;

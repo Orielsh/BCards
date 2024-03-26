@@ -33,6 +33,25 @@ export async function register(user: IUserDetails): Promise<IUserDetails> {
     }
 }
 
+export async function updateUser(token: IToken, user: any, userId: string): Promise<IUserDetails> {
+    try {
+        const response = await fetch(`https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token.token,
+            },
+            body: JSON.stringify(user),
+        });
+        if (!response.ok)
+            throw new Error(await response.text());
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function getUserById(token: IToken, userId: string): Promise<IUserDetails> {
     try {
         const response = await fetch(`https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${userId}`, {
