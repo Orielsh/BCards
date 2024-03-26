@@ -10,7 +10,7 @@ Clone or Download the Repository:
 
 If you have Git installed, clone the repository using the following command in your terminal:
 Bash
-git clone [repository_url]
+git clone [[repository_url](https://github.com/Orielsh/BCards.git)]
 
 Alternatively, download the ZIP archive of the repository and extract it to your desired location.
 Install Dependencies:
